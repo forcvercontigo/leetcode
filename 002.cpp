@@ -6,7 +6,7 @@ ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
         extra = sum / 10;
         p->next = new ListNode(sum % 10);
         p = p->next;
-        l1 = l1 ? l1->next : l1;
+        l1 = l1 ? l1->next : l1;//if l1->next == NULL, l1->next = NULL,else,l1 = l1->next;
         l2 = l2 ? l2->next : l2;
     }
     return preHead.next;
