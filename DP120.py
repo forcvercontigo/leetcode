@@ -1,35 +1,26 @@
-"""
-DP
-"""
-class Solution(object):
+class Solution:
+    def helper(self, triangle, row, col, dest, memo):
+        if row == dest:
+            return triangle[row][col]
+        
+        if (row, col) in memo:
+            return memo[(row, col)]
+        
+        min_sum = min(self.helper(triangle, row + 1, col, dest, memo), self.helper(triangle, row + 1, col + 1, dest, memo))
+        
+        memo[(row, col)] = min_sum + triangle[row][col]
+        return memo[(row, col)]
+    
+    
     def minimumTotal(self, triangle):
         """
         :type triangle: List[List[int]]
         :rtype: int
+        subproblems:
+        row_index, col_index -> end
         """
+        if not triangle:
+            return 0
         
-        
-        n = len(triangle)
-        
-        dp =[[-1]*n]*n 
-        
-        def recur(triangle,idx,level,n,dp):
-            if level==n:
-                return
-            
-            dp[level][idx] = min(recur(triangle,idx,level+1,n,dp),recur(triangle,idx+1,level+1,n,dp))
-            
-            
-        level = 1
-        idx = 0
-        recur(triangle,idx,level,n,dp)
-        print(dp)
-        return dp[level][idx]
-        
-        
-        
-        
-        
-        
-        
-        
+        dest = len(triangle) - 1
+        return self.helper(triangle, 0, 0, dest, {})
