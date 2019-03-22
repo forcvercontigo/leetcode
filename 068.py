@@ -20,8 +20,12 @@ class Solution(object):
                     char_count = len(word)
                 else:
                     q, r = divmod(space_left, word_count-1)
+                    #q is the average space in each middle of words
+                    #r is rth word as middle,left of it is one more space
+                    # plus one because al least one space middle
                     front = (" "*(q+2)).join(line[:r+1])
                     end = (" "*(q+1)).join(line[r+1:])
+                    
                     string = front+" "*(q+1)+end
                     if string:
                         res.append(string)
@@ -40,3 +44,9 @@ class Solution(object):
             line += " "*(maxWidth-len(line))
             res.append(line)
         return res
+        
+        
+        
+        
+        
+        
